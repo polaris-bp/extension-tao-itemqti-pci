@@ -21,6 +21,12 @@
 | [TAO_JQUERY_VERSION_REPORT.md](./TAO_JQUERY_VERSION_REPORT.md) | TAO Platform jQueryバージョン調査 | jQuery 2.1.1 |
 | [LODASH_SECURITY_REPORT.md](./LODASH_SECURITY_REPORT.md) | Lodash脆弱性とバージョン調査 | Lodash 4.17.21 |
 
+### 3. CVEベース確認チェックリスト
+
+| ドキュメント | 説明 | 対象 |
+|-----------|------|------|
+| [CVE_BASED_CHECKLIST.md](./CVE_BASED_CHECKLIST.md) | 既知CVEに基づく実務的チェックリスト | jQuery/Lodash |
+
 ---
 
 ## エグゼクティブサマリー
@@ -88,6 +94,25 @@
 - [ ] TAO CoreへのLodash 4.17.23アップグレード要求（GitHub Issue）
 - [ ] 段階的Lodashレス化の検討（ネイティブJavaScript置き換え）
 
+### CVEベース確認チェックリスト
+
+**実施日**: 2026-02-02
+
+**対象**: jQuery 2.1.1（4件のCVE）、Lodash 4.17.21（4件のCVE、うち1件未パッチ）
+
+**総合評価**: ✅ **全項目クリア**（29項目中29項目安全）
+
+**確認項目数**:
+- jQuery: 16項目（CVE-2015-9251: 4項目、CVE-2019-11358: 4項目、CVE-2020-11022: 4項目、CVE-2020-11023: 4項目）
+- Lodash: 13項目（CVE-2025-13465: 4項目、CVE-2019-10744: 4項目、CVE-2020-8203: 2項目、CVE-2021-23337: 3項目）
+
+**主な発見**:
+- jQuery 4つの既知CVEがあるが、影響を受けるメソッド・使用パターンが全て不在
+- Lodash 1つの未パッチCVE（CVE-2025-13465）があるが、脆弱なメソッド（`_.unset`, `_.omit`）を使用していない
+- **結論**: mathEntryInteractionはCVEベースで安全
+
+**検索コマンド**: 全29項目の確認コマンドを含む
+
 ---
 
 ## リスクマトリックス
@@ -109,6 +134,7 @@
 - [x] XSSセキュリティレビュー実施
 - [x] jQueryバージョン調査
 - [x] Lodash脆弱性調査
+- [x] CVEベース確認チェックリスト作成・実施（jQuery 16項目、Lodash 13項目）
 
 #### 優先度P1
 - [ ] TAO containerEditorのサニタイズ確認
