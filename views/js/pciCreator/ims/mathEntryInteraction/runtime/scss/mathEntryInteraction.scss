@@ -199,8 +199,7 @@ $defaultGapWidth: 30;
                 display: none;
             }
 
-            sup, sub {
-                line-height: inherit;
+            sup.mq-nthroot {
                 top: initial;
             }
 
